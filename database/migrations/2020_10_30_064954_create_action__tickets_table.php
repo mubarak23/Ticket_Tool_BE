@@ -15,6 +15,13 @@ class CreateActionTicketsTable extends Migration
     {
         Schema::create('action__tickets', function (Blueprint $table) {
             $table->bigIncrements('id');
+             $table->string('case_id');
+            $table->string('user_id');
+            $table->longText('issue');
+            $table->string('issue_type');
+            $table->string('assign_to');
+            $table->string('submitted_by');
+            $table->longText('actions');
             $table->timestamps();
         });
     }
