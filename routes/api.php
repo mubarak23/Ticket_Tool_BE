@@ -24,5 +24,4 @@ Route::group(['prefix' => 'ticket'], function () {
         'as' => 'Create Ticket'
     ]);
 
-
-    })
+ });

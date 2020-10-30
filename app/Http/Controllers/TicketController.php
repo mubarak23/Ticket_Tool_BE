@@ -26,7 +26,6 @@ class TicketController extends Controller
             'issue' => 'required',
             'submitted_by' => 'required',
             'comment' => 'required',
-            'status' => 'required',
             'assign_to_email' => 'required|email'
         ]);
 
