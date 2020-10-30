@@ -11,6 +11,7 @@ class TicketController extends Controller
 {
     //
 
+	//create icket issue
     public function create_ticket(Request $request, TicketService $TicketService){
 
         $validation = Validator::make($request->all(), [
@@ -45,4 +46,12 @@ class TicketController extends Controller
         return $create_ticket;
 
     }
+
+    //fetch issue lists base on login user
+    public function user_ticket_lists($user_id){
+    	$query = Ticket::where('user_id' $user_id)->get();
+    	$counts = $query->count();
+    	return response()->json(['message' => 'Ticket lists created by specific user', 'data' => $query], 200);
+    }
+
 }

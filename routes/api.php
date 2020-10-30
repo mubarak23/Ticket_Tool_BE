@@ -24,4 +24,9 @@ Route::group(['prefix' => 'ticket'], function () {
         'as' => 'Create Ticket'
     ]);
 
+    Route::get('user_ticket_lists', [
+        'uses' => 'TicketController@user_ticket_lists',
+        'as' => 'Ticket lists created by specific user'
+    ]);
+
  });
