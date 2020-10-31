@@ -15,6 +15,9 @@ class Ticket extends Model
 
     protected $primaryKey = 'case_id';
 
+    public function actions(){
+    	return $this->hasOne(Action_Ticket::class, 'case_id', 'case_id');
+    }
 
 
 }

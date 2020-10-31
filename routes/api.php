@@ -19,29 +19,48 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'ticket'], function () {
 
+	//create_ticket
     Route::post('create_ticket', [
         'uses' => 'TicketController@create_ticket',
         'as' => 'Create Ticket'
     ]);
 
+    //create_action_ticket
     Route::post('create_action_ticket', [
         'uses' => 'ActionTicketController@create_action_on_ticket',
-        'as' => 'Create Acttion on Ticket'
+        'as' => 'Create Action on Ticket'
     ]);
 
 
+    //update_ticket_status
+    Route::put('update_ticket_status', [
+        'uses' => 'TicketController@update_ticket_status',
+        'as' => 'Update status on Ticket'
+    ]);
+
+
+    //user_ticket_lists
     Route::get('user_ticket_lists/{user_id}', [
         'uses' => 'TicketController@user_ticket_lists',
         'as' => 'Ticket lists created by specific user'
     ]);
 
+
+    //user_action_tickets
     Route::get('user_action_tickets/{user_id}', [
         'uses' => 'ActionTicketController@user_action_tickets',
         'as' => 'Action on Ticket lists created by specific user'
     ]);
 
+    //Ticket_details
+    Route::get('ticket_details/{user_id}/{case_id}', [
+        'uses' => 'TicketController@Ticket_details',
+        'as' => 'Ticket Details'
+    ]);
+
 
  });
+
 
 Route::group(['prefix' => 'auth'], function () {
 

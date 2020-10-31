@@ -54,4 +54,45 @@ class TicketController extends Controller
     	return response()->json(['message' => 'Ticket lists created by specific user', 'data' => $query], 200);
     }
 
+    //update Ticket status
+    public function update_ticket_status(Request $request){
+    	   $validation = Validator::make($request->all(), [
+            'case_id' => 'required',
+            'user_id' => 'required',
+            'status' => 'required'
+        ]);
+
+        if($validation->fails()){
+            return response()->json($validation->errors(), 401);
+        }
+
+         $data = $request->all();
+
+         //check if the tticket exsits
+         $ticket_exist = Ticket::where('user_id', $data['user_id'])->where('case_id', $data['case_id'])->exists();
+         if(!$ticket_exist){
+         	return response()->json(['message' => ' Ticket with the provided details does not exists'], 400);
+          }
+
+          $update_status = Ticket::where('user_id', $data['user_id'])->where('case_id', $data['case_id'])->first();
+          $update_status->update(['status' => $data['status']]);
+          
+
+          return response()->json(['message' => 'Status Updated Successfully', 'data' => $update_status], 200);
+
+      }
+
+
+      public function Ticket_details($user_id, $case_id){
+      		$ticket = Ticket::where('user_id', $user_id)->where('case_id', $case_id)->first();
+      		$ticket_action = Ticket::find($case_id)->actions;
+      		$actions = $ticket_action->actions;
+      		$ticket['actions'] = $actions;
+      		return $ticket;
+
+      }
+
+
+
+
 }
