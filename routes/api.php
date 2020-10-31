@@ -40,7 +40,20 @@ Route::group(['prefix' => 'ticket'], function () {
         'as' => 'Action on Ticket lists created by specific user'
     ]);
 
-    
+
+ });
+
+Route::group(['prefix' => 'auth'], function () {
+
+    Route::post('register', [
+        'uses' => 'UserController@RegisterAccount',
+        'as' => 'User Auth Register'
+    ]);
+
+    Route::post('AuthLogin', [
+        'uses' => 'UserController@AuthLogin',
+        'as' => 'User Auth Login'
+    ]);
 
 
  });
