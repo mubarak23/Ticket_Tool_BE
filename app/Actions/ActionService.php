@@ -1,4 +1,3 @@
-
 <?php
 namespace App\Actions;
 use App\Exceptions\InvalidRequestException;

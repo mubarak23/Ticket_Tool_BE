@@ -19,14 +19,28 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'ticket'], function () {
 
-    Route::post('create_icket', [
+    Route::post('create_ticket', [
         'uses' => 'TicketController@create_ticket',
         'as' => 'Create Ticket'
     ]);
 
-    Route::get('user_ticket_lists', [
+    Route::post('create_action_ticket', [
+        'uses' => 'ActionTicketController@create_action_on_ticket',
+        'as' => 'Create Acttion on Ticket'
+    ]);
+
+
+    Route::get('user_ticket_lists/{user_id}', [
         'uses' => 'TicketController@user_ticket_lists',
         'as' => 'Ticket lists created by specific user'
     ]);
+
+    Route::get('user_action_tickets/{user_id}', [
+        'uses' => 'ActionTicketController@user_action_tickets',
+        'as' => 'Action on Ticket lists created by specific user'
+    ]);
+
+    
+
 
  });
