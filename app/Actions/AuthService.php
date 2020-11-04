@@ -28,6 +28,6 @@ class AuthService{
             return response()->json(['message' => 'could not create token'], 500);
         }
         $user = User::where('email', $data['email'])->first();
-        return response()->json(['token' => $token, 'user_id' => $user->id, 'full_name' => $user->full_name, 'Admin' => $user->isAdmin], 200);
+        return response()->json(['token' => $token, 'user_id' => $user->id, 'full_name' => $user->name, 'Admin' => $user->isAdmin], 200);
     }
 }
