@@ -49,8 +49,9 @@ Route::group(['prefix' => 'ticket'], function () {
     ]);
 
     //single ticket details
+    //git push heroku main
     Route::get('ticket_details/{case_id}', [
-        'uses' => 'TicketController@ticket_details',
+        'uses' => 'TicketController@single_ticket_details',
         'as' => 'Ticket Details'
     ]);
 
