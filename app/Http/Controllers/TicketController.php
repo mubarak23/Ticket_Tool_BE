@@ -47,6 +47,12 @@ class TicketController extends Controller
 
     }
 
+    //fetch ticket details
+    public function ticket_details(case_id){
+          $ticket_details = Ticket::where('case_id', $case_id)->first();
+           return response()->json(['message' => 'Ticket  Details', 'data' => $ticket_details], 200);
+    }
+
     //fetch issue lists base on login user
     public function user_ticket_lists($user_id){
     	$query = Ticket::where('user_id', $user_id)->get();

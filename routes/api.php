@@ -31,6 +31,9 @@ Route::group(['prefix' => 'ticket'], function () {
         'as' => 'Create Action on Ticket'
     ]);
 
+    //case_id ig9XsAYEEX
+
+
 
     //update_ticket_status
     Route::put('update_ticket_status', [
@@ -45,6 +48,11 @@ Route::group(['prefix' => 'ticket'], function () {
         'as' => 'Ticket lists created by specific user'
     ]);
 
+    //single ticket details
+    Route::get('ticket_details/{case_id}', [
+        'uses' => 'TicketController@ticket_details',
+        'as' => 'Ticket Details'
+    ]);
 
     //user_action_tickets
     Route::get('user_action_tickets/{user_id}', [
