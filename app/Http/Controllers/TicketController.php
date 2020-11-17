@@ -50,14 +50,14 @@ class TicketController extends Controller
     //fetch ticket details
     public function single_ticket_details($case_id){
           $ticket_details = Ticket::where('case_id', $case_id)->first();
-           return response()->json(['message' => 'Ticket  Details', 'data' => $ticket_details], 200);
+           return response()->json($ticket_details, 200);
     }
 
     //fetch issue lists base on login user
     public function user_ticket_lists($user_id){
     	$query = Ticket::where('user_id', $user_id)->get();
     	$counts = $query->count();
-    	return response()->json(['message' => 'Ticket lists created by specific user', 'data' => $query], 200);
+    	return response()->json($query, 200);
     }
 
     //update Ticket status
@@ -82,7 +82,7 @@ class TicketController extends Controller
 
           $update_status = Ticket::where('user_id', $data['user_id'])->where('case_id', $data['case_id'])->first();
           $update_status->update(['status' => $data['status']]);
-          
+
 
           return response()->json(['message' => 'Status Updated Successfully', 'data' => $update_status], 200);
 
