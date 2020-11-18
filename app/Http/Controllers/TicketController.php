@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Actions\TicketService;
 use App\Ticket;
+use App\Action_Ticket;
 
 class TicketController extends Controller
 {
@@ -90,11 +91,19 @@ class TicketController extends Controller
 
 
       public function Ticket_details($user_id, $case_id){
-      		$ticket = Ticket::where('user_id', $user_id)->where('case_id', $case_id)->first();
+              $ticket = Ticket::where('user_id', $user_id)->where('case_id', $case_id)->first();
+
+              $check = Action_Ticket::where('case_id', $case_id)->exists();
+        if(!$check){
+            $ticket['actions'] = 'Ticket Issue Does not have Action at the Moment';
+        $ticket['duraion'] = $ticket['updated_at']->diffInDays($ticket['created_at']);
+        return response()->json($ticket, 200);
+        }
       		$ticket_action = Ticket::find($case_id)->actions;
       		$actions = $ticket_action->actions;
-      		$ticket['actions'] = $actions;
-      		return $ticket;
+              $ticket['actions'] = $actions;
+              $ticket['duraion'] = $ticket['updated_at']->diffInDays($ticket['created_at']);
+      		return response()->json($ticket, 200);
 
       }
 
