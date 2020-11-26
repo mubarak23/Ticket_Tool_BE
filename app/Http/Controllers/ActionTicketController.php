@@ -52,7 +52,7 @@ class ActionTicketController extends Controller
     public function user_action_tickets($user_id){
     		$query = Action_Ticket::where('user_id', $user_id)->get();
     		$counts = $query->count();
-    		return response()->json(['message' => 'Ticket lists created by specific user', 'data' => $query], 200);
+    		return response()->json($query, 200);
     }
 
 
